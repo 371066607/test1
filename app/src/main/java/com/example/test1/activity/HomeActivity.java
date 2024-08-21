@@ -9,6 +9,7 @@ import com.example.test1.entity.TabEntity;
 import com.example.test1.fragment.HomeFragment;
 import com.example.test1.fragment.MyFragment;
 import com.example.test1.fragment.NewsFragment;
+import com.example.test1.fragment.AiFragment;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -18,12 +19,12 @@ import java.util.ArrayList;
 public class HomeActivity extends BaseActivity {
 
 
-    private String[] mTitles = {"首页", "资讯", "我的"};
+    private String[] mTitles = {"首页", "资讯", "Ai对话","我的"};
     private int[] mIconUnselectIds = {
-            R.drawable.home_unselect, R.drawable.collect_unselect,
+            R.drawable.home_unselect, R.drawable.collect_unselect,R.drawable.comment,
             R.drawable.my_unselect};
     private int[] mIconSelectIds = {
-            R.drawable.home_selected, R.drawable.collect_select,
+            R.drawable.home_selected, R.drawable.collect_select,R.drawable.comment,
             R.drawable.my_selected};
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();
@@ -42,6 +43,7 @@ public class HomeActivity extends BaseActivity {
     protected void initData() {
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(NewsFragment.newInstance());
+        mFragments.add(AiFragment.newInstance());
         mFragments.add(MyFragment.newInstance());
         for (int i = 0; i < mTitles.length; i++){
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));

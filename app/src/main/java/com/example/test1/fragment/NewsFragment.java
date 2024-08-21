@@ -142,12 +142,12 @@ public class NewsFragment extends BaseFragment {
                     // 如果是刷新操作则清空数据列表
                     if (isRefresh) {
                         datas.clear();
+                    }
                         datas.addAll(list);
                     } else {
-                        // 否则追加数据
-                        datas.addAll(list);
+                    Log.d("NewsFragment", "数据为空或未获取到数据");
                     }
-                }
+
                 // 关闭响应体
                 response.body().close();
                 // 在主线程中更新UI
@@ -156,25 +156,36 @@ public class NewsFragment extends BaseFragment {
                         // 如果适配器为空则创建并设置适配器
                         newsAdapter = new NewsAdapter(getContext(), datas);
                         recyclerView.setAdapter(newsAdapter);
-                        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(Serializable obj) {
-//                                NewsEntity newsEntity = (NewsEntity) obj;
-                                // 跳转到新闻详情页
-//                                String url = "http://baidu.com"+newsEntity.getAuthorName();
-                                String url = "http://blog.csdn.net/m0_57203176/article/details/140783078?spm=1001.2014.3001.5502";
-                                //这里真正实现才需要写入，目前就只是不带参的地址，模拟
-                                Bundle bundle = new Bundle();
-                                bundle.putString("url",url);
-                               navigateToWithBundle(WebAcitivity.class,bundle);
-                            }
+                        newsAdapter.setOnItemClickListener((Serializable obj) -> {
+                            // 跳转到新闻详情页
+                            String url = "http://blog.csdn.net/m0_57203176/article/details/140783078?spm=1001.2014.3001.5502";
+                            //这里真正实现才需要写入，目前就只是不带参的地址，模拟
+                            Bundle bundle = new Bundle();
+                            bundle.putString("url", url);
+                            navigateToWithBundle(WebAcitivity.class, bundle);
                         });
+//                        newsAdapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(Serializable obj) {
+////                                NewsEntity newsEntity = (NewsEntity) obj;
+//                                // 跳转到新闻详情页
+////                                String url = "http://baidu.com"+newsEntity.getAuthorName();
+//                                String url = "http://blog.csdn.net/m0_57203176/article/details/140783078?spm=1001.2014.3001.5502";
+//                                //这里真正实现才需要写入，目前就只是不带参的地址，模拟
+//                                Bundle bundle = new Bundle();
+//                                bundle.putString("url",url);
+//                               navigateToWithBundle(WebAcitivity.class,bundle);
+//                            }
+//                        });
 
                     } else {
                         newsAdapter.notifyDataSetChanged(); // 如果适配器已存在，则更新数据并通知适配器
                     }
                     // 结束刷新
                     refreshLayout.finishRefresh();
+                    if (!isRefresh) {
+                        refreshLayout.finishLoadMore();
+                    }
                 });
             }
         });

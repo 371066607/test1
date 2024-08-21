@@ -141,8 +141,6 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             imgCollect.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
                     OkHttpClient client = new OkHttpClient.Builder().build();
                     Request request = new Request.Builder()
                             .url("http://110.41.60.211:8080/video/addCllectVid"+"?userId="+userId+"&vid="+datas.get(mPosition).getId())

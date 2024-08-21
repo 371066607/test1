@@ -142,7 +142,6 @@ public class VideoFragment extends Fragment implements OnItemChildClickListener 
 
                 String result = response.body().string();
                 try {
-
                     JSONObject jsonObject = new JSONObject(result);
                     JSONObject dataObj = jsonObject.getJSONObject("data");
                     JSONArray dataArray = dataObj.getJSONArray("list");
@@ -150,7 +149,6 @@ public class VideoFragment extends Fragment implements OnItemChildClickListener 
                     for (int i = 0; i < dataArray.length(); i++) {
                         JSONObject dataItem = dataArray.getJSONObject(i);
                         VideoEntity videoEntity = new VideoEntity(
-
                                 dataItem.getInt("vid"),
                                 dataItem.getString("vtitle"),
                                 dataItem.getString("author"),
